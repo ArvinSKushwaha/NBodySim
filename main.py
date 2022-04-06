@@ -19,7 +19,7 @@ ti.init(arch=ti.gpu, default_fp=ti.f32, fast_math=True)
 # To calculate i given x, we can just invert, giving us floor((x - x_min) / dx)
 
 particle_count = 160000
-# dispersion_radius = 3  # Spread mass with a truncated gaussian distribution over this radius
+# dispersion_radius = 3 # Spread mass with a truncated gaussian distribution over this radius
 # scaling = 5  # Calculate the perturbations induced by particles within a manhattan distance (|∆x| + |∆y|) of 5
 
 G, c, rho = 100, 1, 10
@@ -28,7 +28,7 @@ pi = 3.141592
 
 (x_min, x_max), (y_min, y_max) = x_bounds, y_bounds = bounds = (-10, 10), (-10, 10)
 x_range, y_range = x_max - x_min, y_max - y_min
-x_res, y_res = resolution = (3840, 2160)
+x_res, y_res = resolution = (500, 500)
 
 dx = (x_max - x_min) / x_res
 dy = (y_max - y_min) / y_res
@@ -40,7 +40,7 @@ pos, vel = ti.Vector.field(2, ti.f32), ti.Vector.field(2, ti.f32)
 
 density = ti.field(ti.f32)
 energy = ti.field(ti.f32)
-pixels = ti.Vector.field(3, ti.f32, shape=(1920, 1080))
+pixels = ti.Vector.field(3, ti.f32, shape=(500, 500))
 
 
 ti.root.bitmasked(ti.i, (particle_count,)).place(pos, vel)
